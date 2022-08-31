@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Home</title>
+</head>
+<body>
+
+    <h1>JSON Placeholder Users</h1>
+    
+    
+    
+    <button onclick="clearResponseText()">Clear Page</button>
+
+    <p id="response"></p>
+
+    
+
+    <!-- <p>Looking for a specific user? Enter their id number below.</p>
+    <form>
+        <input type="text" name="askForId" id="inputId" placeholder="User ID">
+    </form>
+    <button onclick="getUser()">Get One User</button> -->
+
+
+
+    <!-- <p>Would you like to delete a user? Enter their id number below.</p>
+    <form>
+        <input type="text" name="askForIdDelete" id="deletedId" placeholder="User ID">
+    </form>
+    <button onclick="deleteUser()">Delete This User</button> -->
+
+    <div id="getUser">
+        <h2>GET</h2>
+        <input type="text", id="userId" placeholder="User ID"><br>
+        <button onclick="requestUserId('GET')">Get User</button>
+        <button onclick="reqAllUsers('GET')">Get All Users</button>
+    </div>
+
+
+    <div id="postUser">
+        <h2>POST</h2>
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="text", id="email" placeholder="Email"><br>
+        <button onclick="postNewUser()">Create New User</button>
+        <button onclick="reqAllUsers('POST')">Post 10 Users</button>
+    </div>
+
+    <div id="deleteUser">
+        <h2>DELETE</h2>
+        <input type="text", id="userId" placeholder="User ID"><br>
+        <button onclick="requestUserId('DELETE')">Delete User</button>
+        <button onclick="reqAllUsers('DELETE')">Delete All Users</button>
+        <br><br><br><br><br><br><br><br><br>
+    </div>
+
+
+    <div id="footer">   <!--Footer menu links-->
+
+        <a href="http://localhost:3500/">Home</a>
+        <a href="http://localhost:3500/users">Users</a>
+        <a href="http://localhost:3500/posts">Posts</a>
+        <a href="http://localhost:3500/comments">Comments</a>
+        <a href="http://localhost:3500/albums">Albums</a>
+        <a href="http://localhost:3500/photos">Photos</a>
+        <a href="http://localhost:3500/todos">Todos</a>
+    </div>
+
+    <script src="users.js"></script>
+</body>
+</html>

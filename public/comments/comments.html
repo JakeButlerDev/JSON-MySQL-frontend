@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Comments Home</title>
 </head>
 <body>
-    <h1>Testing old phone, who dis?</h1>
+    <script src="comments.js"></script>
+
+    <h1>JSON Placeholder Comments</h1>
+    <button onclick="getAllComments()">Get All Comments</button>
+
+    <p id="responseAll"></p>
+
+
+    <p>Looking for a specific comment? Enter the id number below.</p>
+    <form>
+        <input type="text" name="askForId" id="inputId" placeholder="Comment ID">
+    </form>
+    <button onclick="getComment()">Get One Comment</button>
+
+    <p id="responseOne"></p>
 
     <div id="footer">   <!--Footer menu links-->
 

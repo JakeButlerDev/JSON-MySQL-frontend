@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Posts Home</title>
 </head>
 <body>
-    <h1>Testing old phone, who dis?</h1>
+    <script src="posts.js"></script>
+
+    <h1>JSON Placeholder Posts</h1>
+    <button onclick="getAllPosts()">Get All Posts</button>
+
+    <p id="responseAll"></p>
+
+    <p>Looking for a specific post? Enter the id number below.</p>
+    <form>
+        <input type="text" name="askForId" id="inputId" placeholder="Post ID">
+    </form>
+    <button onclick="getPost()">Get One Post</button>
+
+    <p id="responseOne"></p>
 
     <div id="footer">   <!--Footer menu links-->
 

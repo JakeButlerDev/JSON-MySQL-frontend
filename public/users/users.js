@@ -23,21 +23,21 @@ const getAllUsers = () => {
 }
 
 const requestUserId = (method) => {
-    if (!['GET', 'POST', 'DELETE'].includes(method)) {
-        alert('Invalid method used with fetch.');
+    if (!['GET', 'DELETE'].includes(method)) {
+        alert('Invalid method used for requestAllUsers.');
         return
     }
 
     const userId = parseInt(document.getElementById("userId").value);
-    let errorMsg = '';
 
+    let errorMsg = '';
     if (isNaN(userId)) errorMsg = 'Please enter a valid user ID. Must be a number.';
     else if (userId < 1) errorMsg = 'Please enter a valid user ID. Must be greater than 0.';
 
     if (errorMsg !== '') {
         document.getElementById("userId").value = '';
         document.getElementById("response").innerText = errorMsg;
-        return
+        return;
     }
 
     fetch(apiURL + '/users/sql/id' + userId, {method: method})
@@ -57,7 +57,7 @@ const requestUserId = (method) => {
         document.getElementById("response").innerText = error
     })
     .finally(() => {
-        document.getElementById("userId").value = '';
+        document.getElementById("userName").value = '';
     })
 }
 
@@ -120,7 +120,7 @@ const postNewUser = () => {
 
     console.log(userName, userEmail);
 
-    let errorMsg = '';
+    let errorMsg = [];
 
     if (userName === '') errorMsg.push('Please enter a valid username. ')
     if (userEmail === '') errorMsg.push('lease enter a valid email.')
@@ -133,7 +133,7 @@ const postNewUser = () => {
     }
 
     fetch(apiURL + '/users/', {
-        method: POST},
+        method: POST,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -141,5 +141,23 @@ const postNewUser = () => {
             // name: name
             username: userName,
             email: userEmail
-        }) )
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (isValidJSON) {
+            const parsedJSON = JSON.parse(data);
+            document.getElementById("response").innerText = JSON.stringify(data, null, '\t');
+        } else {
+            document.getElementById("response").innerText = data;
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        document.getElementById("response").innerText = error;
+    })
+    .finally(() => {
+        document.getElementById("username").value = '';
+        document.getElementById("email").value = '';
+    })
 }

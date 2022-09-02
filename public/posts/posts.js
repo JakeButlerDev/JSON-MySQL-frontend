@@ -14,34 +14,144 @@ const isValidJSON = (str) => {
     }
 }
 
-// GET all posts in SQL db
-const getAllPosts = () => {
-    const apiURL = "http://localhost:4500/api/posts/sql/all";
-    fetch(apiURL)
-        .then(response => response.json())
-        .then(data => {
-            // const parsedJSON = JSON.parse(data)
-            document.getElementById("response").innerText = JSON.stringify(data, null, '\t');
-        })
-        .catch(error => console.log(error));
+// Clear all inout fields, to be called when other methods are finished
+const clearInputs = () => {
+    document.getElementById("postId").value = ''
+    document.getElementById("deletedId").value = '';
+    document.getElementById("body").value = '';
+    document.getElementById("title").value = '';
+    document.getElementById("userId").value = '';
+    // document.getElementsByTagName("input").value = '';
+    // document.getElementsByName("input").value = '';
 }
+
+// GET all posts in SQL db
+// Currently unused
+// const getAllPosts = () => {
+//     const apiURL = "http://localhost:4500/api/posts/sql/all";
+//     fetch(apiURL)
+//         .then(response => response.json())
+//         .then(data => {
+//             // const parsedJSON = JSON.parse(data)
+//             document.getElementById("response").innerText = JSON.stringify(data, null, '\t');
+//         })
+//         .catch(error => console.log(error));
+// }
 
 // GET one post by id from SQL db
-const getPost = () => {
-    let id = document.getElementById("inputId").value;
-    const apiURL = `http://localhost:4500/api/posts/sql/id/${id}`;
-    fetch(apiURL)
-    .then(response => response.json())
-    .then(data => {
-        const parsedJSON = JSON.parse(data)
-        document.getElementById("response").innerText = JSON.stringify(parsedJSON, null, '\t');
+// Currently unused
+// const getPost = () => {
+//     let id = document.getElementById("inputId").value;
+//     const apiURL = `http://localhost:4500/api/posts/sql/id/${id}`;
+//     fetch(apiURL)
+//     .then(response => response.json())
+//     .then(data => {
+//         const parsedJSON = JSON.parse(data)
+//         document.getElementById("response").innerText = JSON.stringify(parsedJSON, null, '\t');
+//     })
+//     .catch(error => console.log(error));
+// }
+
+// Create a new post and add to db
+const postNewPost = () => {
+    const apiURL = "http://localhost:4500/api";
+
+    const userId = document.getElementById("userId").value;
+    const title = document.getElementById("title").value;
+    const body = document.getElementById("body").value;
+
+    let errorMsg = []
+    if (userId === '') errorMsg.push('Please enter a valid User ID.')
+    if (title === '') errorMsg.push('Please enter a valid title.')
+    if (body === '') errorMsg.push('lease enter a valid body.')
+
+    if (errorMsg.length > 0) {
+        console.log(errorMsg);
+        clearInputs();
+        document.getElementById("response").innerText = errorMsg.join('\n');
+    }
+
+    fetch(`${apiURL}/posts/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userId: userId,
+            title: title,
+            body: body
+        })
     })
-    .catch(error => console.log(error));
+    .then(response => response.text())
+    .then(data => {
+        if (isValidJSON) {
+            const parsedJSON = JSON.parse(data);
+            document.getElementById("response").innerText = JSON.stringify(parsedJSON, null, '\t');
+        } else {
+            document.getElementById("response").innerText = data;
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        document.getElementById("response").innerText = error;
+    })
+    .finally(() => {
+        clearInputs();
+    })
 }
 
-// postNewPost
+// PUT one post by id with new input data
+const updatePost = () => {
+    const apiURL = "http://localhost:4500/api";
 
-// updatePost
+    const postId = parseInt(document.getElementById("postId").value);
+    const userId = document.getElementById("userId").value;
+    const title = document.getElementById("title").value;
+    const body = document.getElementById("body").value;
+
+    let errorMsg = [];
+    if (isNaN(postId)) errorMsg.push('Please enter a valid post ID. Must be a number.');
+    else if (postId < 1) errorMsg.push('Please enter a valid post ID. Must be greater than 0.');
+
+    if (errorMsg.length > 0) {
+        console.log(errorMsg);
+        document.getElementById("name").value = '';
+        document.getElementById("username").value = '';
+        document.getElementById("email").value = '';
+        document.getElementById("response").innerText = errorMsg.join('\n');
+    }
+
+    const updateBody = {
+        id: postId,
+        userId: userId,
+        title: title,
+        body: body
+    }
+
+    fetch(`${apiURL}/posts/sql/id/${postId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateBody)
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (isValidJSON) {
+            const parsedJSON = JSON.parse(data);
+            document.getElementById("response").innerText = JSON.stringify(parsedJSON, null, '\t');
+        } else {
+            document.getElementById("response").innerText = data;
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        document.getElementById("response").innerText = error;
+    })
+    .finally(() => {
+        clearInputs();
+    })
+}
 
 // GET, POST, DELETE one post by id
 const requestPostId = (method) => {
@@ -69,7 +179,6 @@ const requestPostId = (method) => {
         }
         else {
             document.getElementById("response").innerText = data;
-
         }
     })
     .catch(error => {
@@ -83,6 +192,7 @@ const requestPostId = (method) => {
     })
 }
 
+// GET, POST, DELETE all posts
 const reqAllPosts = (method) => {
     const apiURL = "http://localhost:4500/api";
 
@@ -108,6 +218,7 @@ const reqAllPosts = (method) => {
     })
 }
 
+// Clear current data shown in div "response"
 const clearResponseText = () => {
     document.getElementById("response").innerText = '';
 }

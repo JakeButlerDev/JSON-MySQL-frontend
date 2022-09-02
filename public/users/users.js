@@ -156,7 +156,8 @@ const postNewUser = () => {
 
     let errorMsg = [];
 
-    if (userName === '') errorMsg.push('Please enter a valid username. ')
+    if (name === '') errorMsg.push('Please enter a valid name.')
+    if (userName === '') errorMsg.push('Please enter a valid username.')
     if (userEmail === '') errorMsg.push('lease enter a valid email.')
 
     if (errorMsg.length > 0) {
@@ -260,7 +261,6 @@ const clearResponseText = () => {
 }
 
 const clearInputs = () => {
-    document.getElementById("input").value = '';
     document.getElementById("userName").value = ''
     document.getElementById("deletedId").value = '';
     document.getElementById("name").value = '';

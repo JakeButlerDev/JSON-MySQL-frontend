@@ -7,21 +7,44 @@
     <title>Comments Home</title>
 </head>
 <body>
-    <script src="comments.js"></script>
-
     <h1>JSON Placeholder Comments</h1>
-    <button onclick="getAllComments()">Get All Comments</button>
 
-    <p id="responseAll"></p>
+    <button onclick="clearResponseText()">Clear Results</button>
+
+    <p id="response"></p>
 
 
-    <p>Looking for a specific comment? Enter the id number below.</p>
+    <!-- <p>Looking for a specific comment? Enter the id number below.</p>
     <form>
         <input type="text" name="askForId" id="inputId" placeholder="Comment ID">
     </form>
-    <button onclick="getComment()">Get One Comment</button>
+    <button onclick="getComment()">Get One Comment</button> -->
 
-    <p id="responseOne"></p>
+    <div id="getComment">
+        <h2>GET</h2>
+        <input type="text", id="commentId" placeholder="Comment ID"><br>
+        <button onclick="reqAllComments('GET')">Get All Comments</button>
+        <button onclick="requestCommentId('GET')">Get One Comment By ID</button>
+    </div>
+
+    <div id="postComment">
+        <h2>POST</h2>
+        <input type="text" id="postId" placeholder="Post ID"><br>
+        <input type="text" id="name" placeholder="Name"><br>
+        <input type="text" id="email" placeholder="Email"><br>
+        <input type="text", id="body" placeholder="Body (max length of 350 characters)"><br> <!-- Make error checking alert if body.length > 350 -->
+        <button onclick="postNewComment()">Create New Comment</button>
+        <button onclick="reqAllComments('POST')">Post 500 Comments</button>
+        <button onclick="updateComment()">Update Comment</button>
+    </div>
+
+    <div id="deleteComment">
+        <h2>DELETE</h2>
+        <input type="text", id="deletedId" placeholder="Comment ID to be deleted"><br>
+        <button onclick="requestCommentId('DELETE')">Delete Comment</button>
+        <button onclick="reqAllComments('DELETE')">Delete All Comments</button>
+    </div>
+
 
     <div id="footer">   <!--Footer menu links-->
 
@@ -32,6 +55,8 @@
         <a href="http://localhost:3500/albums">Albums</a>
         <a href="http://localhost:3500/photos">Photos</a>
         <a href="http://localhost:3500/todos">Todos</a>
+
+        <script src="comments.js"></script>
     </div>
 </body>
 </html>

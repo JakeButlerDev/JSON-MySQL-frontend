@@ -1,6 +1,10 @@
 // FOR ALL JS USED IN users.html
 
 
+/* CURRENTLY, Frontend not set up to understand backend messages i.e. 'User not found', 'Must be an integer', etc.                
+Data is stored in entire table fields, IDs do not correspond to data type and therefore when user is entering IDs can be confusing to enter correct value
+*/
+
 // Test response type to make sure we're not parsing plain text
 const isValidJSON = (str) => {
     try {
@@ -23,22 +27,26 @@ const getAllUsers = () => {
         .catch(error => console.log(error));
 }
 
+// GET, POST, DELETE user by id
 const requestUserId = (method) => {
     const apiURL = "http://localhost:4500/api";
 
     if (!['GET', 'DELETE'].includes(method)) {
-        alert('Invalid method used for requestAllUsers.');
-        return
+        alert('Invalid method used for requestUserId.');
+        return;
     }
 
-    const userId = parseInt(document.getElementById("userId").value);
+    if (method == 'DELETE') var userId = parseInt(document.getElementById("deletedId").value);
+     else var userId = parseInt(document.getElementById("userId").value);
+
+    // const userId = parseInt(document.getElementById("userId").value);
 
     let errorMsg = '';
     if (isNaN(userId)) errorMsg = 'Please enter a valid user ID. Must be a number.';
     else if (userId < 1) errorMsg = 'Please enter a valid user ID. Must be greater than 0.';
 
     if (errorMsg !== '') {
-        document.getElementById("userId").value = '';
+        // clearInputs();
         document.getElementById("response").innerText = errorMsg;
         return;
     }
@@ -60,7 +68,7 @@ const requestUserId = (method) => {
         document.getElementById("response").innerText = error
     })
     .finally(() => {
-        document.getElementById("userName").value = '';
+        // clearInputs();
     })
 }
 
@@ -104,12 +112,13 @@ const getUser = () => {
 }
 
 // DELETE one user by id in SQL db
+// Currently unused, requestUserId is handling this
 const deleteUser = () => {
-    let userId = document.getElementById("deletedId").value;
+    const userId = parseInt(document.getElementById("deletedId").value);
     const apiURL = `http://localhost:4500/api`;
 
 
-    fetch(apiURL + '/users/sql/id' + userId, 'DELETE')
+    fetch(apiURL + '/users/sql/id/' + userId, 'DELETE')
     .then(response => response.text())
     .then(data => {
         if (isValidJSON(data)) {
@@ -135,14 +144,7 @@ const deleteAllUsers = () => {
 
 }
 
-/* CURRENTLY, Frontend not set up to understand backend messages i.e. 'User not found', 'Must be an integer', etc.                
-Data is stored in entire table fields, IDs do not correspond to data type and therefore when user is entering IDs can be confusing to enter correct value
-*/
-
-const clearResponseText = () => {
-    document.getElementById("response").innerText = '';
-}
-
+// POST new user in SQL db
 const postNewUser = () => {
     const apiURL = "http://localhost:4500/api";
 
@@ -159,9 +161,7 @@ const postNewUser = () => {
 
     if (errorMsg.length > 0) {
         console.log(errorMsg);
-        document.getElementById("name").value = '';
-        document.getElementById("username").value = '';
-        document.getElementById("email").value = '';
+        clearInputs();
         document.getElementById("response").innerText = errorMsg.join('\n');
     }
 
@@ -190,12 +190,11 @@ const postNewUser = () => {
         document.getElementById("response").innerText = error;
     })
     .finally(() => {
-        document.getElementById("name").value = '';
-        document.getElementById("username").value = '';
-        document.getElementById("email").value = '';
+        clearInputs();
     })
 }
 
+// PUT a user already created, update with new info
 const updateUser = () => {
     const apiURL = "http://localhost:4500/api";
 
@@ -254,4 +253,17 @@ const updateUser = () => {
         document.getElementById("username").value = '';
         document.getElementById("email").value = '';
     })
+}
+
+const clearResponseText = () => {
+    document.getElementById("response").innerText = '';
+}
+
+const clearInputs = () => {
+    document.getElementById("input").value = '';
+    document.getElementById("userName").value = ''
+    document.getElementById("deletedId").value = '';
+    document.getElementById("name").value = '';
+    document.getElementById("email").value = '';
+    document.getElementById("userId").value = '';
 }

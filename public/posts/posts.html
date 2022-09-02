@@ -7,20 +7,43 @@
     <title>Posts Home</title>
 </head>
 <body>
-    <script src="posts.js"></script>
-
     <h1>JSON Placeholder Posts</h1>
-    <button onclick="getAllPosts()">Get All Posts</button>
 
-    <p id="responseAll"></p>
+    <button onclick="clearResponseText()">Clear Results</button>
 
-    <p>Looking for a specific post? Enter the id number below.</p>
+    <p id="response"></p>
+
+    <!-- <p>Looking for a specific post? Enter the id number below.</p>
     <form>
         <input type="text" name="askForId" id="inputId" placeholder="Post ID">
     </form>
-    <button onclick="getPost()">Get One Post</button>
+    <button onclick="getPost()">Get One Post</button> -->
 
-    <p id="responseOne"></p>
+    <!-- METHODS BELOW NOT CREATED YET! -->
+
+    <div id="getPost">
+        <h2>GET</h2>
+        <input type="text", id="postId" placeholder="Post ID"><br>
+        <button onclick="reqAllPosts('GET')">Get All Posts</button>
+        <button onclick="requestPostId('GET')">Get One Post By ID</button>
+    </div>
+
+    <div id="postPost">
+        <h2>POST</h2>
+        <input type="text" id="title" placeholder="Title"><br>
+        <input type="text", id="body" placeholder="Body"><br>
+        <button onclick="postNewPost()">Create New Post</button>
+        <button onclick="reqAllPosts('POST')">Post 100 Posts</button>
+        <button onclick="updatePost()">Update Post</button>
+    </div>
+
+    <div id="deletePost">
+        <h2>DELETE</h2>
+        <input type="text", id="deletedId" placeholder="Post ID to be deleted"><br>
+        <button onclick="requestPostId('DELETE')">Delete Post</button>
+        <button onclick="reqAllPosts('DELETE')">Delete All Posts</button>
+    </div>
+
 
     <div id="footer">   <!--Footer menu links-->
 
@@ -32,5 +55,7 @@
         <a href="http://localhost:3500/photos">Photos</a>
         <a href="http://localhost:3500/todos">Todos</a>
     </div>
+
+    <script src="posts.js"></script>
 </body>
 </html>

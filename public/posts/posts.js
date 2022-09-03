@@ -209,7 +209,6 @@ const reqAllPosts = (method) => {
         }
         else {
             document.getElementById("response").innerText = data;
-
         } 
     })
     .catch(error => {

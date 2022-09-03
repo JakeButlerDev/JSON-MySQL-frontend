@@ -7,20 +7,42 @@
     <title>Photos Home</title>
 </head>
 <body>
-    <script src="photos.js"></script>
-
     <h1>JSON Placeholder Photos</h1>
-    <button onclick="getAllPhotos()">Get All Photos</button>
 
-    <p id="responseAll"></p>
+    <button onclick="clearResponseText()">Clear Results</button>
 
-    <p>Looking for a specific photo? Enter the id number below.</p>
+    <p id="response"></p>
+
+    <!-- <p>Looking for a specific photo? Enter the id number below.</p>
     <form>
         <input type="text" name="askForId" id="inputId" placeholder="Photo ID">
-    </form>
-    <button onclick="getPhoto()">Get One Photo</button>
+    </form> -->
 
-    <p id="responseOne"></p>
+    <div id="getPhoto">
+        <h2>GET</h2>
+        <input type="text", id="photoId" placeholder="Photo ID"><br>
+        <button onclick="reqAllPhotos('GET')">Get All Photos</button>
+        <button onclick="requestPhotoId('GET')">Get One Photo</button>
+    </div>
+
+    <div id="postPhoto">
+        <h2>POST</h2>
+        <input type="text" id="title" placeholder="Title"><br>
+        <input type="text", id="albumId" placeholder="Album ID"><br>
+        <input type="text", id="url" placeholder="URL"><br>
+        <input type="text", id="thumbnailUrl" placeholder="Thumbnail URL"><br>
+        <button onclick="postNewPhoto()">Create New Photo</button>
+        <button onclick="reqAllPhotos('POST')">Post 5000 Photos</button>
+        <button onclick="updatePhoto()">Update Photo</button>
+    </div>
+
+    <div id="deletePhoto">
+        <h2>DELETE</h2>
+        <input type="text", id="deletedId" placeholder="Post ID to be deleted"><br>
+        <button onclick="requestPhotoId('DELETE')">Delete Photo</button>
+        <button onclick="reqAllPhotos('DELETE')">Delete All Photos</button>
+    </div>
+
 
     <div id="footer">   <!--Footer menu links-->
 
@@ -31,6 +53,9 @@
         <a href="http://localhost:3500/albums">Albums</a>
         <a href="http://localhost:3500/photos">Photos</a>
         <a href="http://localhost:3500/todos">Todos</a>
+
+
+        <script src="photos.js"></script>
     </div>
 </body>
 </html>

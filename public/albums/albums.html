@@ -7,22 +7,35 @@
     <title>Albums Home</title>
 </head>
 <body>
-    <script src="albums.js"></script>
-
     <h1>JSON Placeholder Albums</h1>
-    <button onclick="getAllAlbums()">Get All Albums</button>
+    
+    <button onclick="clearResponseText()">Clear Results</button>
 
-    <p id="responseAll"></p>
+    <p id="response"></p>
 
+    <div id="getAlbum">
+        <h2>GET</h2>
+        <input type="text", id="albumId" placeholder="Album ID"><br>
+        <button onclick="reqAlbumId('GET')">Get One Album</button>
+        <button onclick="reqAllAlbums('GET')">Get All Albums</button>
+    </div>
 
+    <div id="postAlbum">
+        <h2>POST</h2>
+        <input type="text" id="userId" placeholder="User ID"><br>
+        <input type="text" id="title" placeholder="Title"><br>
+        <button onclick="postNewAlbum()">Create New Album</button>
+        <button onclick="reqAllAlbums('POST')">Post 100 Albums</button>
+        <button onclick="updateAlbum()">Update Album</button>
+    </div>
 
-    <p>Looking for a specific album? Enter the id number below.</p>
-    <form>
-        <input type="text" name="askForId" id="inputId" placeholder="Album ID">
-    </form>
-    <button onclick="getAlbum()">Get One Album</button>
+    <div id="deleteAlbum">
+        <h2>DELETE</h2>
+        <input type="text", id="deletedId" placeholder="Album ID to be deleted"><br>
+        <button onclick="reqAlbumId('DELETE')">Delete Album</button>
+        <button onclick="reqAllAlbums('DELETE')">Delete All Albums</button>
+    </div>
 
-    <p id="responseOne"></p>
 
     <div id="footer">   <!--Footer menu links-->
 
@@ -33,6 +46,9 @@
         <a href="http://localhost:3500/albums">Albums</a>
         <a href="http://localhost:3500/photos">Photos</a>
         <a href="http://localhost:3500/todos">Todos</a>
+
+
+        <script src="albums.js"></script>
     </div>
 </body>
 </html>

@@ -182,8 +182,8 @@ const requestPostId = (method) => {
         }
     })
     .catch(error => {
-        console.log(error)
-        document.getElementById("response").innerText = error
+        console.log(error);
+        document.getElementById("response").innerText = error;
     })
     .finally(() => {
         document.getElementById("deletedId").value = '';
@@ -212,8 +212,8 @@ const reqAllPosts = (method) => {
         } 
     })
     .catch(error => {
-        console.log(error)
-        document.getElementById("response").innerText = error
+        console.log(error);
+        document.getElementById("response").innerText = error;
     })
 }
 

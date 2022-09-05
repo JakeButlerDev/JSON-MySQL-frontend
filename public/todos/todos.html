@@ -7,21 +7,35 @@
     <title>Todos Home</title>
 </head>
 <body>
-    <script src="todos.js"></script>
-
     <h1>JSON Placeholder Todos</h1>
-    <button onclick="getAllTodos()">Get All Todos</button>
 
-    <p id="responseAll"></p>
+    <button onclick="clearResponseText()">Clear Results</button>
 
+    <p id="response"></p>
 
-    <p>Looking for a specific todo? Enter the id number below.</p>
-    <form>
-        <input type="text" name="askForId" id="inputId" placeholder="User ID">
-    </form>
-    <button onclick="getTodo()">Get One Todo</button>
+    <div id="getTodo">
+        <h2>GET</h2>
+        <input type="text", id="todoId" placeholder="Todo ID"><br>
+        <button onclick="reqAllTodos('GET')">Get All Todos</button>
+        <button onclick="requestTodoId('GET')">Get One Todo</button>
+    </div>
 
-    <p id="responseOne"></p>
+    <div id="postTodo">
+        <h2>POST</h2>
+        <input type="text" id="userId" placeholder="User ID"><br>
+        <input type="text" id="title" placeholder="Title"><br>
+        <input type="text", id="completed" placeholder="Completed? Y or N --> Turn this into a T/F dropdown for boolean code in IntelliJ"><br>
+        <button onclick="postNewTodo()">Create New Todo</button>
+        <button onclick="reqAllTodos('POST')">Post 100 Todos</button>
+        <button onclick="updateTodo()">Update Todo</button>
+    </div>
+
+    <div id="deleteTodo">
+        <h2>DELETE</h2>
+        <input type="text", id="deletedId" placeholder="Todo ID to be deleted"><br>
+        <button onclick="requestTodoId('DELETE')">Delete Todo</button>
+        <button onclick="reqAllTodos('DELETE')">Delete All Todos</button>
+    </div>
 
     <div id="footer">   <!--Footer menu links-->
 
@@ -32,6 +46,9 @@
         <a href="http://localhost:3500/albums">Albums</a>
         <a href="http://localhost:3500/photos">Photos</a>
         <a href="http://localhost:3500/todos">Todos</a>
+
+
+        <script src="todos.js"></script>
     </div>
 </body>
 </html>

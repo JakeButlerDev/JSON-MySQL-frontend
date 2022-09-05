@@ -112,7 +112,7 @@ const postNewTodo = () => {
 
     const userId = document.getElementById("userId").value;
     const title = document.getElementById("title").value;
-    const completed = document.getElementById("completed").value;
+    const completed = document.getElementById("completedDropdown").value;
 
     let errorMsg = []
     if (userId === '') errorMsg.push('Please enter a valid User ID.')

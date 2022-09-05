@@ -24,7 +24,13 @@
         <h2>POST</h2>
         <input type="text" id="userId" placeholder="User ID"><br>
         <input type="text" id="title" placeholder="Title"><br>
-        <input type="text", id="completed" placeholder="Completed? Y or N --> Turn this into a T/F dropdown for boolean code in IntelliJ"><br>
+        <!-- <input type="text", id="completed" placeholder="Completed? Y or N  Turn this into a T/F dropdown for boolean code in IntelliJ"><br> -->
+        <p>Completed?</p>
+        <!-- Make select tag inline with p tag -->
+        <select name="completed" id="completedDropdown">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select><br>
         <button onclick="postNewTodo()">Create New Todo</button>
         <button onclick="reqAllTodos('POST')">Post 100 Todos</button>
         <button onclick="updateTodo()">Update Todo</button>
